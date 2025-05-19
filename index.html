@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sinai University Portal - Student Information System">
+    <meta name="theme-color" content="#1a237e">
+    <title>UniCode Portal - Sinai University</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo-2.219644d0.png">
+    <link rel="preload" href="images/slider_image_1.jpg" as="image">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #2962ff;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .main-nav {
+            background: var(--secondary-color);
+            padding: 0.5rem 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-list a:hover {
+            background: var(--accent-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .quick-link-card i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .quick-link-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .quick-link-card p {
+            margin: 0;
+            color: #666;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .slider {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="images/logo-2.219644d0.png" alt="Sinai University Logo" width="50" height="50">
+                <div class="logo-text">
+                    <h1>Sinai University</h1>
+                    <p>UniCode Portal</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container nav-content">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="transcript.html">Transcript</a></li>
+                <li><a href="grading.html">Grading</a></li>
+                <li><a href="military.html">Military</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content container">
+        <div class="slider">
+            <img src="images/slider_image_1.jpg" alt="Campus View 1" class="active" loading="eager">
+            <img src="images/slider_image_2.jpg" alt="Campus View 2" loading="lazy">
+            <img src="images/slider_image_3.jpg" alt="Campus View 3" loading="lazy">
+        </div>
+
+        <section class="card welcome-section">
+            <h2 class="section-title">Welcome to Sinai University Portal</h2>
+            <p>Sinai University was established refereeing to the presidential decree number 363 for year 2005 in accordance to provisions of law number 101 year 1992 regarding the private Universities which was replaced by law number 12 year 2009 regarding the private and civil Universities and its executive regulations issued by the presidential decree number 302 for year 2010.</p>
+        </section>
+
+        <div class="grid grid-2 quick-links">
+            <div class="card">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Student Profile</h3>
+                <p>View and update your personal information</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-book"></i>
+                <h3>Course Registration</h3>
+                <p>Register for your courses</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Schedule</h3>
+                <p>View your class schedule</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-file-alt"></i>
+                <h3>Transcript</h3>
+                <p>Access your academic records</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2024 Sinai University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple image slider
+        const slider = document.querySelector('.slider');
+        const images = slider.querySelectorAll('img');
+        let currentImage = 0;
+
+        function nextImage() {
+            images[currentImage].classList.remove('active');
+            currentImage = (currentImage + 1) % images.length;
+            images[currentImage].classList.add('active');
+        }
+
+        setInterval(nextImage, 5000);
+    </script>
+</body>
+</html>

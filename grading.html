@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Grading System - UniCode Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grading.css">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #2962ff;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .main-nav {
+            background: var(--secondary-color);
+            padding: 0.5rem 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-list a:hover {
+            background: var(--accent-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .grading-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .grading-header {
+            margin-bottom: 2rem;
+        }
+
+        .grading-title {
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .grading-subtitle {
+            color: #666;
+            margin: 0;
+        }
+
+        .semester-selector {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .semester-selector select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 200px;
+        }
+
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .grades-table th,
+        .grades-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .grades-table th {
+            background: var(--light-bg);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .grades-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .course-code {
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .grade-cell {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .grade-a {
+            color: var(--success-color);
+        }
+
+        .grade-b {
+            color: var(--accent-color);
+        }
+
+        .grade-c {
+            color: var(--warning-color);
+        }
+
+        .grade-f {
+            color: var(--error-color);
+        }
+
+        .gpa-summary {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .summary-title {
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .print-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .print-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .grades-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media print {
+            .header, .main-nav, .semester-selector, .print-button {
+                display: none;
+            }
+
+            .grading-container {
+                box-shadow: none;
+            }
+
+            .grades-table th,
+            .grades-table td {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/logo-2.219644d0.png" alt="Sinai University Logo" style="height: 50px;">
+                <div class="logo-text">
+                    <h1>Sinai University</h1>
+                    <p>UniCode Portal</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-content">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="transcript.html">Transcript</a></li>
+                <li><a href="grading.html">Grading</a></li>
+                <li><a href="military.html">Military</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="grading-container">
+            <div class="grading-header">
+                <h2 class="grading-title">Grading System</h2>
+                <p class="grading-subtitle">Spring Semester 2024-2025</p>
+            </div>
+
+            <div class="semester-selector">
+                <label for="semester">Select Semester:</label>
+                <select id="semester">
+                    <option value="spring2025">Spring 2024-2025</option>
+                    <option value="fall2024">Fall 2024-2025</option>
+                </select>
+            </div>
+
+            <table class="grades-table">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Credits</th>
+                        <th>Grade</th>
+                        <th>Quality Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="course-code">DEM2101</td>
+                        <td>Biochemistry (2)</td>
+                        <td>3</td>
+                        <td class="grade-cell grade-b">B</td>
+                        <td>9.25</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DEM2102</td>
+                        <td>Physiology (2)</td>
+                        <td>2</td>
+                        <td class="grade-cell grade-b">B+</td>
+                        <td>9.5</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DEM2105</td>
+                        <td>General Pathology (2)</td>
+                        <td>2</td>
+                        <td class="grade-cell grade-a">A-</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DEM2107</td>
+                        <td>Microbiology and immunology (2)</td>
+                        <td>2</td>
+                        <td class="grade-cell grade-a">A+</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DEM2104</td>
+                        <td>HUMAN ANATOMY (2)</td>
+                        <td>2</td>
+                        <td class="grade-cell grade-a">A+</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DEH2102</td>
+                        <td>Oral Biology (2)</td>
+                        <td>3</td>
+                        <td class="grade-cell grade-b">B+</td>
+                        <td>10.5</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DEB2101</td>
+                        <td>Dental Biomaterials (2)</td>
+                        <td>3</td>
+                        <td class="grade-cell grade-b">B</td>
+                        <td>9.25</td>
+                    </tr>
+                    <tr>
+                        <td class="course-code">DED2103</td>
+                        <td>Cycology</td>
+                        <td>2</td>
+                        <td class="grade-cell grade-b">B-</td>
+                        <td>8.75</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="gpa-summary">
+                <h3 class="summary-title">GPA Summary</h3>
+                <div class="summary-item">
+                    <span class="summary-label">Total Credits:</span>
+                    <span>18</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Points:</span>
+                    <span>48.56</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Current GPA:</span>
+                    <span>3.4856</span>
+                </div>
+            </div>
+
+            <button class="print-button" onclick="window.print()">Print Grades</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>UNICode Portal @Copyright All Right Reserved 2020</p>
+        </div>
+    </footer>
+</body>
+</html> 

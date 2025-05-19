@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Academic Transcript - UniCode Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #2962ff;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .main-nav {
+            background: var(--secondary-color);
+            padding: 0.5rem 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-list a:hover {
+            background: var(--accent-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .transcript-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .transcript-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .transcript-title {
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .transcript-subtitle {
+            color: #666;
+            margin: 0;
+        }
+
+        .student-info {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+        }
+
+        .student-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .student-details {
+            flex: 1;
+        }
+
+        .student-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            color: var(--text-color);
+        }
+
+        .transcript-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .transcript-table th,
+        .transcript-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .transcript-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .transcript-table tr:nth-child(even) {
+            background: var(--light-bg);
+        }
+
+        .gpa-summary {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .gpa-title {
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .gpa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gpa-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gpa-label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .gpa-value {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .print-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .print-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .student-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .transcript-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media print {
+            .header, .main-nav, .print-button {
+                display: none;
+            }
+
+            .transcript-container {
+                box-shadow: none;
+            }
+
+            .transcript-table th {
+                background: none;
+                color: var(--text-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/logo-2.219644d0.png" alt="Sinai University Logo" style="height: 50px;">
+                <div class="logo-text">
+                    <h1>Sinai University</h1>
+                    <p>UniCode Portal</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-content">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="transcript.html">Transcript</a></li>
+                <li><a href="grading.html">Grading</a></li>
+                <li><a href="military.html">Military</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="transcript-container">
+            <div class="transcript-header">
+                <div class="student-info">
+                    <div class="student-photo">
+                        <img src="images/user-profile.png" alt="Student Photo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="student-details">
+                        <h2 class="student-name">Mohamed Elzeer</h2>
+                        <p class="student-id">ID: 202304079</p>
+                        <p class="student-department">Department: Dentistry</p>
+                        <p class="student-program">Program: Bachelor of Dentistry</p>
+                        <p class="academic-year">Academic Year: 2024-2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <table class="transcript-table">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Credits</th>
+                        <th>Grade</th>
+                        <th>Quality Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DEM2101</td>
+                        <td>Biochemistry (2)</td>
+                        <td>3</td>
+                        <td>B</td>
+                        <td>9.25</td>
+                    </tr>
+                    <tr>
+                        <td>DEM2102</td>
+                        <td>Physiology (2)</td>
+                        <td>2</td>
+                        <td>B+</td>
+                        <td>9.5</td>
+                    </tr>
+                    <tr>
+                        <td>DEM2105</td>
+                        <td>General Pathology (2)</td>
+                        <td>2</td>
+                        <td>A-</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>DEM2107</td>
+                        <td>Microbiology and immunology (2)</td>
+                        <td>2</td>
+                        <td>A+</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td>DEM2104</td>
+                        <td>HUMAN ANATOMY (2)</td>
+                        <td>2</td>
+                        <td>A+</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td>DEH2102</td>
+                        <td>Oral Biology (2)</td>
+                        <td>3</td>
+                        <td>B+</td>
+                        <td>10.5</td>
+                    </tr>
+                    <tr>
+                        <td>DEB2101</td>
+                        <td>Dental Biomaterials (2)</td>
+                        <td>3</td>
+                        <td>B</td>
+                        <td>9.25</td>
+                    </tr>
+                    <tr>
+                        <td>DED2103</td>
+                        <td>Cycology</td>
+                        <td>2</td>
+                        <td>B-</td>
+                        <td>8.75</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="gpa-summary">
+                <h3 class="gpa-title">GPA Summary</h3>
+                <div class="gpa-grid">
+                    <div class="gpa-item">
+                        <span class="gpa-label">Total Credits</span>
+                        <span class="gpa-value">18</span>
+                    </div>
+                    <div class="gpa-item">
+                        <span class="gpa-label">Total Points</span>
+                        <span class="gpa-value">48.56</span>
+                    </div>
+                    <div class="gpa-item">
+                        <span class="gpa-label">Current GPA</span>
+                        <span class="gpa-value">3.4856</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="print-button" onclick="window.print()">Print Transcript</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>UNICode Portal @Copyright All Right Reserved 2020</p>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Class Schedule - UniCode Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #2962ff;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .main-nav {
+            background: var(--secondary-color);
+            padding: 0.5rem 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-list a:hover {
+            background: var(--accent-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .schedule-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .schedule-header {
+            margin-bottom: 2rem;
+        }
+
+        .schedule-title {
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .schedule-subtitle {
+            color: #666;
+            margin: 0;
+        }
+
+        .semester-selector {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .semester-selector select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 200px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .schedule-table th {
+            background: var(--light-bg);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .schedule-table td {
+            vertical-align: top;
+        }
+
+        .time-slot {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .course-block {
+            background: var(--light-bg);
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-code {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .course-name {
+            margin: 0.25rem 0;
+        }
+
+        .course-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .room-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .room-icon {
+            color: var(--primary-color);
+        }
+
+        .schedule-summary {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .summary-title {
+            color: var(--primary-color);
+            margin: 0 0 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .print-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .print-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media print {
+            .header, .main-nav, .semester-selector, .print-button {
+                display: none;
+            }
+
+            .schedule-container {
+                box-shadow: none;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/logo-2.219644d0.png" alt="Sinai University Logo">
+                <div class="logo-text">
+                    <h1>Sinai University</h1>
+                    <p>UniCode Portal</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-content">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="transcript.html">Transcript</a></li>
+                <li><a href="grading.html">Grading</a></li>
+                <li><a href="military.html">Military</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="schedule-container">
+            <div class="schedule-header">
+                <h2 class="schedule-title">Class Schedule</h2>
+                <p class="schedule-subtitle">Fall Semester 2023-2024</p>
+            </div>
+
+            <div class="semester-selector">
+                <label for="semester">Select Semester:</label>
+                <select id="semester">
+                  
+                    <option value="spring2024">Spring 2024-2025</option>
+                </select>
+            </div>
+
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="schedule-summary">
+                <h3 class="summary-title">Schedule Summary</h3>
+                <div class="summary-item">
+                    <span class="summary-label">Total Courses:</span>
+                    <span>8</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Hours:</span>
+                    <span>18</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Credits:</span>
+                    <span>18</span>
+                </div>
+            </div>
+
+            <button class="print-button" onclick="window.print()">Print Schedule</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>UNICode Portal @Copyright All Right Reserved 2020</p>
+        </div>
+    </footer>
+</body>
+</html> 
